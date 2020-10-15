@@ -1,4 +1,4 @@
-module github.com/wuapp/rj
+module github.com/wuapp/rj-go
 
 go 1.15
 
