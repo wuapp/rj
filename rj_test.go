@@ -22,7 +22,10 @@ array: ["a","b"]`
 	}
 
 	in = `name: "a\c"
-array: ["a","b"]`
+array: ["a","b"]
+
+[ANode]
+name: "Anna"`
 	node, err = ParseString(in)
 	if err != nil {
 		name := node.GetString("name")
@@ -33,6 +36,16 @@ array: ["a","b"]`
 		arr := node.GetStringArray("array")
 		if !arrayEquals(arr, []string{"a", "b"}) {
 			t.Error("ParseString failed, expect correct array since we should skip error lines")
+		}
+
+		n, err := node.GetNode("ANode")
+		if err != nil {
+			t.Error("Parse node failed")
+		}
+
+		name = n.GetString("name")
+		if name != "Anna" {
+			t.Error("Get sub node failed, expect: Anna, got:", name)
 		}
 	} else {
 		t.Error("ParseString failed, expect invalid escape error, but got nil")

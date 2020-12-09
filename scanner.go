@@ -65,7 +65,7 @@ func (s *scanner) addError(err error) {
 
 func (s *scanner) scan() {
 	for s.offset < s.len-1 {
-		s.skipSpace()
+		s.skip()
 
 		if s.data[s.offset] == '[' {
 			s.scanNode(s.root)
